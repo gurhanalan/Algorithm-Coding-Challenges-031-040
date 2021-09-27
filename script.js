@@ -103,3 +103,24 @@ function flatten2(oldArr) {
     }
     return newArr;
 }
+
+// ////////////////////////////////
+// 35. capitalizeFirst
+/* 
+Write a recursive function called capitalizeFirst . Given an array of strings, capitalize the first letter of each string in the array.
+*/
+function capitalizeFirst(arr, cap = []) {
+    // console.log(cap);
+    if (arr.length === 0) {
+        return cap;
+    } else {
+        cap.push(arr[0].toLowerCase()[0].toUpperCase() + arr[0].slice(1));
+        return capitalizeFirst(arr.slice(1), cap);
+    }
+
+    // add whatever parameters you deem necessary - good luck!
+}
+
+// capitalizeFirst(['car','taco','banana']); // ['Car','Taco','Banana']
+
+console.log(capitalizeFirst(["car", "taco", "banana"]));
