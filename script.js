@@ -188,3 +188,20 @@ var obj2 = {
 };
 
 console.log(nestedEvenSum(obj2));
+
+///////////////////////////////////////////////
+//37. capitalizeWords
+/* 
+Write a recursive function called capitalizeWords. Given an array of words, return a new array containing each word capitalized.
+*/
+
+function capitalizeWords(arr, cap = []) {
+    if (arr.length === 0) return cap;
+    else {
+        cap.push(arr[0].toUpperCase());
+        return capitalizeWords(arr.slice(1), cap);
+    }
+}
+
+let words = ["i", "am", "learning", "recursion"];
+console.log(capitalizeWords(words)); // ['I', 'AM', 'LEARNING', 'RECURSION']
