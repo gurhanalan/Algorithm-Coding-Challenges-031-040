@@ -205,3 +205,91 @@ function capitalizeWords(arr, cap = []) {
 
 let words = ["i", "am", "learning", "recursion"];
 console.log(capitalizeWords(words)); // ['I', 'AM', 'LEARNING', 'RECURSION']
+
+///////////////////////////////////////////////////////////////
+// 38. stringifyNumbers
+/* 
+Write a function called stringifyNumbers  which takes in an object and finds all of the values which are numbers and converts them to strings. Recursion would be a great way to solve this!
+*/
+/*
+let obj = {
+    num: 1,
+    test: [],
+    data: {
+        val: 4,
+        info: {
+            isRight: true,
+            random: 66
+        }
+    }
+}
+/*
+
+stringifyNumbers(obj)
+
+/*
+{
+    num: "1",
+    test: [],
+    data: {
+        val: "4",
+        info: {
+            isRight: true,
+            random: "66"
+        }
+    }
+}
+*/
+
+function stringifyNumbers(obj) {
+    for (let el in obj) {
+        if (typeof obj[el] === "number") {
+            obj[el] += "";
+        } else if (typeof obj[el] === "object") {
+            obj[el] = stringifyNumbers(obj[el]);
+        }
+    }
+    return obj;
+}
+
+// Not changing the input object
+function stringifyNumbers2(obj1) {
+    const obj = { ...obj1 };
+    for (let el in obj) {
+        if (typeof obj[el] === "number") {
+            obj[el] += "";
+        } else if (typeof obj[el] === "object") {
+            obj[el] = stringifyNumbers2(obj[el]);
+        }
+    }
+    return obj;
+}
+
+// 3rd wat
+function stringifyNumbers3(obj) {
+    const objNew = {};
+    for (let el in obj) {
+        if (typeof obj[el] === "number") {
+            objNew[el] = obj[el] + "";
+        } else if (typeof obj[el] === "object") {
+            objNew[el] = stringifyNumbers3(obj[el]);
+        } else {
+            objNew[el] = obj[el];
+        }
+    }
+    return objNew;
+}
+
+let obj = {
+    num: 1,
+    test: [],
+    data: {
+        val: 4,
+        info: {
+            isRight: true,
+            random: 66,
+        },
+    },
+};
+
+console.log(stringifyNumbers3(obj));
