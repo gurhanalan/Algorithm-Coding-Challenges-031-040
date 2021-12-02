@@ -346,3 +346,60 @@ const obj5 = {
 };
 
 console.log(collectStrings(obj5));
+
+// ////////////////////////////////
+// 40. Simple nearest prime
+/* 
+In this challenge, you will be given a number and your task will be to return the nearest prime number.
+
+solve(4) = 3. The nearest primes are 3 and 5. If difference is equal, pick the lower one. 
+solve(125) = 127
+We'll be testing for numbers up to 1E10. 500 tests.
+
+More examples in test cases.
+*/
+
+function isPrime(num) {
+    // check for 1 and 0
+    if (num <= 1) return false;
+
+    // make an array of prime numbers till the num
+    const arrPrimes = [2];
+    let i = 2;
+    //  decreasing the complexity of the algorithm from O(n) to O(sqrt(n))
+    while (i <= Math.sqrt(num)) {
+        if (num % i === 0) return false;
+
+        i++;
+    }
+    return true;
+}
+
+function solve1(num) {
+    let leftPrimeNum = num,
+        rightPrimeNum = num;
+
+    while (!isPrime(leftPrimeNum)) {
+        leftPrimeNum--;
+    }
+    if (leftPrimeNum === num) return num;
+
+    while (!isPrime(rightPrimeNum)) {
+        rightPrimeNum++;
+    }
+    return num - leftPrimeNum <= rightPrimeNum - num
+        ? leftPrimeNum
+        : rightPrimeNum;
+}
+
+// a better answer for the performance
+function solve2(num) {
+    if (isPrime(num)) return num;
+
+    for (let i = 1; i < num; i++) {
+        if (isPrime(num - i)) return num - i;
+        if (isPrime(num + i)) return num + i;
+    }
+}
+
+// console.log(solve2(14));
